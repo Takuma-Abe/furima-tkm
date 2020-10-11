@@ -1,4 +1,4 @@
-# README
+- # README
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
@@ -21,72 +21,58 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* users
+* users table
 |column|type|optiom|
 |------|----|------|
-|first name|string|not null|
-|last name|string|not null|
-|nickname|string|not null|
-|email|string|not null|
-|first name reading|string|not null|
-|last name reading|string|not null|
-|birthday|date|not null|
+|nickname (devise default)|string|null: false|
+|email(devise default)|string|null: false|
+|encrypted_password (devise default)|integer|null: false|
+|first name|string|null: false|
+|last name|string|null: false|
+|first name reading|string|null: false|
+|last name reading|string|null: false|
+|birthday|date|null: false|
 
 ## Association
 has_many :items
-has_one :card dependent destroy
-
-* items
+has_many :item_transactions
+* items table
 |column|type|optiom|
 |------|----|------|
-|name|string|not null|
-|price|integer|not null|
-|detail|text|not null|
-|condition|integer|not null|
-|category_id|references|not null|
-|user_id|references|not null|
-|delivery_fee_payer|integer|not null| *
-|delivery_method|integer|not null| *
-|delivery_day|integer|not null| *
-|prefecture_id|integer|-----| *
-＊ユーザー管理機能実装時点でまだ不明
+|name|string|null: false|
+|price|integer|null: false|
+|info|text|null: false|
+|delivery_fee_payer_id(active_hash)|integer|null: false| 
+|delivery_method_id(active_hash)|integer|null: false| 
+|delivery_day_id(active_hash)|integer|null: false| 
+|category_id(active_hash)|integer|null: false|
+|user_id|references/integer|foreign_key: true|
 
 ## Association
-belongs_to :user
-belomgs_to :category
+has_many :items
+has_one :item_transaction
 
-* images (using active_storage) 
+* addresses table
 |column|type|optiom|
 |------|----|------|
-|src|text|not null|
-|item|references|not null|
+|postal_code|string|null: false|
+|prefecture|integer|null: false|
+|city|string|null: false|
+|address|string|null: false|
+|building|string||
+|phone_number|string|null: false|
+|item_transaction_id(FK)|references/integer|foreign_key: true|
+
+## Association
+belongs_to :item_transactionuser
+
+* item_transactions table
+column|type|optiom|
+|------|----|------|
+|item_id|references/integer|foreign_key: true|
+|user_id|references/integer|foreign_key: true|
 
 ## Association
 belongs_to :item
-
-
-* categries (using active_hash)
-|column|type|optiom|
-|------|----|------|
-|name|string|not null|
-|item_id|references|not null|
-
-## Association
-has_many :items
-
-* cards
-|column|type|optiom|
-|------|----|------|
-|customer_token|string|not null|
-|card_token|string|not mull|
-|user_id|references|not null|
-
-## Association
 belongs_to :user
-
-<!-- *
-|column|type|optiom|
-|------|----|------|
-||||
-
-##Association -->
+has_one: address

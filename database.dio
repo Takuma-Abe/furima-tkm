@@ -1,0 +1,64 @@
+<mxfile host="65bd71144e" modified="2020-10-11T07:38:09.370Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.49.3 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36" version="13.6.5" etag="apCe--x_bdywAdz4zXZ1">
+    <diagram id="KuNwHUw6yBEUlV1qfrbL" name="ページ1">
+        <mxGraphModel dx="1539" dy="1500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="ユーザー" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" parent="1" vertex="1">
+                    <mxGeometry y="-1" width="240" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="- ニックネーム(devise デフォ) :string&#10;- Eメール(devise デフォ)&#10;- 生年月日 :date&#10;- 苗字 :string&#10;- 本名 :string&#10;- 苗字かな :string&#10;- 本名かな :string&#10;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="2" vertex="1">
+                    <mxGeometry y="30" width="240" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="商品" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" parent="1" vertex="1">
+                    <mxGeometry x="360" width="280" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="- 商品名 :string &#10;- 説明 :text&#10;- カテゴリー (active_hash)&#10;- 配送料負担者 (active_hash)&#10;- 配送地域 (active_hash)&#10;- 発送日数 (active_hash)&#10;- 価格 &#10;- 出品者(ユーザーid)&#10;- 配送住所(住所id)&#10;※ 購入履歴の親モデル&#10;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="9">
+                    <mxGeometry y="30" width="280" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="住所" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" vertex="1" parent="1">
+                    <mxGeometry y="320" width="240" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="- 郵便番号&#10;- 都道府県&#10;- 市区町村&#10;- 住所&#10;- 建物名&#10;- 電話番号&#10;- ユーザーid&#10;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="11">
+                    <mxGeometry y="30" width="240" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;entryX=-0.011;entryY=0.095;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="10">
+                    <mxGeometry width="100" height="100" relative="1" as="geometry">
+                        <mxPoint x="242" y="50" as="sourcePoint"/>
+                        <mxPoint x="340" y="50" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;entryX=-0.011;entryY=0.095;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.004;exitY=0.119;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="12">
+                    <mxGeometry width="100" height="100" relative="1" as="geometry">
+                        <mxPoint x="245" y="375" as="sourcePoint"/>
+                        <mxPoint x="360.00000000000006" y="200.00000000000006" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="17" value="購入履歴" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="360" y="320" width="280" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="- 商品id&#10;- 購入者(ユーザーid)&#10;※ 商品と住所の子モデル" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="17">
+                    <mxGeometry y="30" width="280" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;entryX=-0.011;entryY=0.038;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="18">
+                    <mxGeometry width="100" height="100" relative="1" as="geometry">
+                        <mxPoint x="240" y="70.05" as="sourcePoint"/>
+                        <mxPoint x="354.9200000000001" y="70.00000000000004" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="24" value="" style="fontSize=12;html=1;endArrow=ERmandOne;startArrow=ERmandOne;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="17" target="10">
+                    <mxGeometry width="100" height="100" relative="1" as="geometry">
+                        <mxPoint x="414" y="339" as="sourcePoint"/>
+                        <mxPoint x="514" y="239" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="25" value="" style="fontSize=12;html=1;endArrow=ERmandOne;startArrow=ERmandOne;entryX=1.008;entryY=0.438;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="12">
+                    <mxGeometry width="100" height="100" relative="1" as="geometry">
+                        <mxPoint x="358" y="442" as="sourcePoint"/>
+                        <mxPoint x="300" y="400" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
