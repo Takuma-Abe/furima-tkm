@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+
   def index
     
   end
@@ -8,7 +10,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    binding.pry
+    # binding.pry
     @item = Item.new(item_params)
     if @item.valid?
       @item.save
@@ -35,3 +37,7 @@ class ItemsController < ApplicationController
     ).merge(user_id: current_user.id)
   end
 end
+
+
+# paramsハッシュ一致してるか確認するべき場所: controller, model, migration(DB内のカラム名)
+# 
