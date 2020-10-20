@@ -24,11 +24,11 @@ class Item < ApplicationRecord
     validates :price
   end
 
-  # chech if the price value is half-width and integer
+  # check if the price value is half-width and integer
   
   validates :price, numericality: {with: /\A[0-9]+\z/, message: "Half-width number"}
 
-  # chek if the price is in the range
+  # check if the price is in the range
   validates_inclusion_of :price, in: 300..9_999_999, message: "Out of setting range"
 
   # check if the select is still in id: 0 whoch is "---"
