@@ -10,7 +10,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
   priceInput.addEventListener("input", ()=> {
     const inputValue = document.getElementById("item-price").value;
-    console.log(inputValue)
     addTaxDom.innerHTML = Math.floor(inputValue * 0.1).toLocaleString();
     profitDom.innerHTML = Math.floor(inputValue * 0.9).toLocaleString();
   })
