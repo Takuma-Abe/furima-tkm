@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   # association with other tables ---
   belongs_to :user
-  has_one :item_order
+  has_one :item_transaction
 
   # active_storage's assciation------
   has_one_attached :image
