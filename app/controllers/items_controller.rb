@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-
   def index
     @items = Item.all.order(created_at: :desc)
   end
@@ -18,7 +17,26 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+  end
 
+  def edit
+    @item = Item.find(params[:id])
+    # 実装条件 ：ログイン状態の出品者だけが商品情報編集ページに遷移できること
+    if current_user.id != @item.user.id
+      redirect_to root_path
+    end 
+  end
+
+  def update
+    # binding.pry
+    @item = Item.find(params[:id])
+    if current_user.id == @item.user.id
+      if @item.update(item_params)
+        redirect_to item_path 
+      end 
+    else
+      render 'edit'
+    end
   end
 
   def show
@@ -40,6 +58,7 @@ class ItemsController < ApplicationController
       :price
     ).merge(user_id: current_user.id)
   end
+
 end
 
 
