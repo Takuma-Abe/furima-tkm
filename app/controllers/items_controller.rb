@@ -22,9 +22,6 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     # 実装条件 ：ログイン状態の出品者だけが商品情報編集ページに遷移できること
-    until user_signed_in?
-      redirect_to new_user_session_path
-    end
     if current_user.id != @item.user.id
       redirect_to root_path
     end 
