@@ -9,7 +9,6 @@ class ItemsController < ApplicationController
   end
 
   def create
-    # binding.pry
     @item = Item.new(item_params)
     if @item.valid?
       @item.save
@@ -28,7 +27,6 @@ class ItemsController < ApplicationController
   end
 
   def update
-    # binding.pry
     @item = Item.find(params[:id])
     if current_user.id == @item.user.id
       if @item.update(item_params)
