@@ -1,0 +1,23 @@
+#previews {
+  width: 50rem;
+  height: 10rem;
+  display: flex;
+  overflow: hidden;
+  border: solid 6px red;
+}
+
+/* プレビュー画像1枚分の親 */
+.preview {
+  width: 20%;
+  height: 100%;
+  border: solid 6px green;
+  flex-shrink: 0;
+}
+
+ /* プレビュー画像 */
+.preview-image {
+  width: 100%;
+  height: 85%;
+  vertical-align: top;
+  padding: 1rem 0;
+}
