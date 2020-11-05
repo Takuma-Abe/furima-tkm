@@ -39,6 +39,8 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @comments = @item.comments.includes(:user)
+    @comment = Comment.new
   end
 
   def destroy

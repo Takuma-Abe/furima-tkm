@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   # association with other tables ---
   belongs_to :user
   has_one :item_transaction
+  has_many :comments
 
   # active_storage's assciation------
   has_one_attached :image
