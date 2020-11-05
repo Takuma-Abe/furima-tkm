@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   root 'items#index'
   resources :items do
     resources :transactions, only: [:index, :new, :create]
-    resources :comments , only:[:create]
+    resources :comments , only: [:create]
   end
 end

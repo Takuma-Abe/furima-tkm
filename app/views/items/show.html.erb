@@ -86,24 +86,26 @@
   <div class="comment-box" id="comment-box">
     <div id="comments">
       <div class="comment">
-        <div class="user-info">テストユーザー</div>
-        <p>テストコメント</p>
+        <% @comments.each do |comment| %>
+          <div class="user-info"><%= comment.user.nickname%></div>
+          <p class="content-info"><%= comment.content %></p>
+        <% end %>
       </div>
     </div>
-    <form>
-      <textarea class="comment-text"></textarea>
+    <%= form_with model: [@item, @comment], id: "comment_form" do |f| %>
+      <%= f.text_area :content, class: "comment-text" %>
       <p class="comment-warn">
         相手のことを考え丁寧なコメントを心がけましょう。
         <br>
         不快な言葉遣いなどは利用制限や退会処分となることがあります。
       </p>
-      <button type="submit" class="comment-btn">
+      <%= f.button type="submit",  class: "comment-btn" do %>
         <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
         <span>コメントする<span>
-      </button>
-    </form>
+      <% end %>
+    <% end %>
   </div>
-  <div class="links">
+  <div class="links"> 
     <a href="#" class="change-item-btn">
       ＜ 前の商品
     </a>
