@@ -22,7 +22,11 @@
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :image, id:"item-image" %>
+        <%#= f.file_field :image, id:"item-image" %>
+        <%= f.file_field :images, name: 'item[images][]', id:"item-image", data:{index: 0} %>
+        <%# 複数投稿の実装： 空の配列を用意することで、複数のname属性入力があれば、それぞれを配列としてparamsに送れる。
+             data:{index: 0}は何番目のの画像なのかを特定するdata-imdex属性を付与している%>
+
       </div>
     </div>
     <%# /出品画像 %>

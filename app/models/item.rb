@@ -5,7 +5,9 @@ class Item < ApplicationRecord
   has_many :comments
 
   # active_storage's assciation------
-  has_one_attached :image
+  # has_one_attached :image
+  has_many_attached :images
+  validates :images, length: { minimum: 1, maximum: 5, message: "は1枚以上5枚以下にしてください" }
 
   # active_hash's assciation---------
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -19,7 +21,7 @@ class Item < ApplicationRecord
 
   # chech if these value are presence or not
   with_options presence: true do
-    validates :image   
+    validates :images
     validates :name
     validates :info
     validates :price
