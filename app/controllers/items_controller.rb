@@ -1,6 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :select_item, only: [:show, :edit, :update, :destroy, :purchase_confirm]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :purchase_confirm]
+  before_action :select_item, only: [:show, :edit, :update, :destroy, :purchase_confirm, :purchase]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :purchase_confirm, :purchase]
+  before_action :sold_item, only: [:purchase_confirm, :purchase]
+  before_action :current_user_has_not_card, only: [:purchase_confirm, :purchase]
+
   def index
     @items = Item.all.order(created_at: :desc)
   end
@@ -49,17 +52,42 @@ class ItemsController < ApplicationController
     end
   end
 
-  def purchase_item
+  def purchase_confirm
     @address = Address.new
   end
 
+
   def purchase
-    item_transaction.new(item_id: @item.id, user_id: current_user.id)
+    # binding.pry
+    item_transaction = ItemTransaction.new(item_id: @item.id, user_id: current_user.id)
 
     @address = item_transaction.build_address(address_params)
     if @address.valid?
+      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+        Payjp::Charge.create(
+          amount: @item.price,
+          customer: current_user.card.customer_token,
+          currency:'jpy'
+        )
+      @address.save
+      redirect_to root_path
+    else
+      redirect_to purchase_confirm_item_path(@item)
+    end
   end
+
   private
+
+  def address_params
+    params.permit(
+      :postal_code,
+      :prefecture,
+      :city,
+      :addresses,
+      :building,
+      :phone_number
+    )
+  end
 
   def item_params
     params.require(:item).permit(
@@ -76,9 +104,17 @@ class ItemsController < ApplicationController
   end
 
   def select_item
+    # binding.pry
     @item = Item.find(params[:id])
   end
 
+  def sold_item
+    redirect_to item_path(@item), alert: "売り切れの商品です" if @item.item_transaction.present?
+  end
+
+  def current_user_has_not_card
+    redirect_to new_card_path, alert: "クレジットカードが登録されていません" unless current_user.card.present?
+   end
 end
 
 
