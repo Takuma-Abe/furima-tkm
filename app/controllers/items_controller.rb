@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :select_item, only: [:show, :edit, :update, :destroy, :purchase_confirm]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :purchase_confirm]
   def index
     @items = Item.all.order(created_at: :desc)
   end
@@ -20,7 +21,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
     # 実装条件 ：ログイン状態の出品者だけが商品情報編集ページに遷移できること
     if current_user.id != @item.user.id
       redirect_to root_path
@@ -28,7 +28,6 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item = Item.find(params[:id])
     if current_user.id == @item.user.id
       if @item.update(item_params)
         redirect_to item_path 
@@ -39,19 +38,27 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
     @comments = @item.comments.includes(:user)
     @comment = Comment.new
   end
 
   def destroy
-    @item = Item.find(params[:id])
     if current_user.id == @item.user.id
       @item.destroy
       redirect_to root_path 
     end
   end
 
+  def purchase_item
+    @address = Address.new
+  end
+
+  def purchase
+    item_transaction.new(item_id: @item.id, user_id: current_user.id)
+
+    @address = item_transaction.build_address(address_params)
+    if @address.valid?
+  end
   private
 
   def item_params
@@ -66,6 +73,10 @@ class ItemsController < ApplicationController
       :price,
       images: [] 
     ).merge(user_id: current_user.id)
+  end
+
+  def select_item
+    @item = Item.find(params[:id])
   end
 
 end
