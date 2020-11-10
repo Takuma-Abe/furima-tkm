@@ -1,12 +1,15 @@
 window.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("charge-form");
+  if (!form) return false;
 
-  const path = location.pathname
-  const params = path.replace(/items/g, '').replace(/transactions/g, '').replace(/\//g, '');
+  // const path = location.pathname
+  // const params = path.replace(/items/g, '').replace(/transactions/g, '').replace(/\//g, '');
 
-  if (path.includes("items") && path.includes("transactions") && /^([1-9]\d*|0)$/.test(params)) {
+  // if (path.includes("items") && path.includes("transactions") && /^([1-9]\d*|0)$/.test(params)) {
     const PAYJP_PK = process.env.PAYJP_PUBLIC_KEY
+    console.log(PAYJP_PK)
     Payjp.setPublicKey(PAYJP_PK);
-    const form = document.getElementById("charge-form");
+    // const form = document.getElementById("charge-form");
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const sendWithoutCardInfo = () => {
@@ -41,9 +44,15 @@ window.addEventListener("DOMContentLoaded", () => {
           sendWithoutCardInfo()
         } else {
           // window.alert('購入処理に失敗しました。\nお手数ですが最初からやり直してください。');
+            alert(`
+          カード登録に失敗しました。
+          エラー：${response.error.message}
+          カード情報：
+          {number: ${card.number} cvc: ${card.cvc} month: ${card.exp_month} year: ${card.exp_year}}
+        `);
           sendWithoutCardInfo()
         }
       });
     });
-  }
+  // }
 });
