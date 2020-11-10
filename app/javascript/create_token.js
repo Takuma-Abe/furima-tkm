@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("charge-form");
+  const form = document.getElementById("charge-form");  //charge-formが存在するファイルのみ以下を発火させる仕組み
   if (!form) return false;
 
   // const path = location.pathname
