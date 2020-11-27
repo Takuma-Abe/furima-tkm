@@ -35,7 +35,7 @@ class Item < ApplicationRecord
   validates_inclusion_of :price, in: 300..9_999_999, message: "Out of setting range"
 
   # check if the select is still in id: 0 whoch is "---"
-  with_options numericality: {other_than: 0, massage: "Select"}do
+  with_options numericality: {other_than: 0, massage: "Select"} do
     validates :category_id
     validates :sales_status_id
     validates :delivery_fee_payer_id
