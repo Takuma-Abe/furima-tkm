@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :select_item, only: [:show, :edit, :update, :destroy, :purchase_confirm, :purchase]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :purchase_confirm, :purchase]
   before_action :sold_item, only: [:purchase_confirm, :purchase]
-  before_action :current_user_has_not_card, only: [:purchase_confirm, :purchase]
+  before_action :current_user_has_no_card, only: [:purchase_confirm, :purchase]
 
   def index
     @items = Item.all.order(created_at: :desc)
@@ -112,7 +112,7 @@ class ItemsController < ApplicationController
     redirect_to item_path(@item), alert: "売り切れの商品です" if @item.item_transaction.present?
   end
 
-  def current_user_has_not_card
+  def current_user_has_no_card
     redirect_to new_card_path, alert: "クレジットカードが登録されていません" unless current_user.card.present?
    end
 end
