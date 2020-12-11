@@ -25,13 +25,13 @@ class TransactionsController < ApplicationController
 
   def item_transaction_params
     params.permit(
-      :token,
       :item_id,
       :postal_code,
       :prefecture,
       :city,
       :addresses,
       :building,
+      :token,
       :phone_number
     ).merge(user_id: current_user.id)
   end

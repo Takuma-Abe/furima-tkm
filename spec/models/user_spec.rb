@@ -29,17 +29,17 @@ RSpec.describe User, type: :model do
       it 'password:半角英数混合(半角英語のみ)' do
         @user.password = 'aaaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it 'password:半角英数混合(数字のみ)' do
         @user.password = '1111111'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it 'password:半角英数混合(全角英数混合)' do
         @user.password = 'ＡＡＡＡＡ１１'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it 'email:必須' do
         @user.email = ''
@@ -58,9 +58,9 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Email is invalid")
       end
       it 'birth_date:必須' do
-        @user.birth_date = ''
+        @user.birthday = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Birth date can't be blank")
+        expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
       it 'last_name:必須' do
         @user.last_name = ''
@@ -83,34 +83,34 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("First name Full-width characters")
       end
       it 'last_name_kana:必須' do
-        @user.last_name_kana = ''
+        @user.last_name_reading = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name kana can't be blank")
+        expect(@user.errors.full_messages).to include("Last name reading can't be blank")
       end
       it 'last_name_kana:全角（カタカナ）' do
-        @user.last_name_kana = 'てすと'
+        @user.last_name_reading = 'てすと'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name kana Full-width katakana characters")
+        expect(@user.errors.full_messages).to include("Last name reading Full-width katakana characters")
       end
       it 'last_name_kana:全角（カタカナ）' do
-        @user.last_name_kana = 'aaa'
+        @user.last_name_reading = 'aaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name kana Full-width katakana characters")
+        expect(@user.errors.full_messages).to include("Last name reading Full-width katakana characters")
       end
       it 'first_name_kana:必須' do
-        @user.first_name_kana = ''
+        @user.first_name_reading = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana can't be blank")
+        expect(@user.errors.full_messages).to include("First name reading can't be blank")
       end
       it 'first_name_kana:全角（カタカナ）' do
-        @user.first_name_kana = 'てすと'
+        @user.first_name_reading = 'てすと'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana Full-width katakana characters")
+        expect(@user.errors.full_messages).to include("First name reading Full-width katakana characters")
       end
       it 'first_name_kana:全角（カタカナ）' do
-        @user.first_name_kana = 'aaa'
+        @user.first_name_reading = 'aaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana Full-width katakana characters")
+        expect(@user.errors.full_messages).to include("First name reading Full-width katakana characters")
       end
     end
   end
