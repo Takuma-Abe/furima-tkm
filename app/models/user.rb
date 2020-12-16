@@ -26,5 +26,5 @@ class User < ApplicationRecord
   has_many :items
   has_many :item_transaction
   has_one :card, dependent: :destroy
-
+  has_one :address_preset, dependent: :destroy
 end
