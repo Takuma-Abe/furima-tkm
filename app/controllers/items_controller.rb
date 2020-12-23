@@ -52,6 +52,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def search
+    @q = Item.ransack(params[:q])
+    @items = @q.result
+  end
+
   def purchase_confirm
     @address = Address.new
   end
