@@ -14,9 +14,9 @@ class ItemsController < ApplicationController
 
   def create
     # binding.pry
-    @item = Item.new(item_params)
-    if @item.valid?
-      @item.save
+    @item_form = ItemForm.new(item_form_params)
+    if @item_form.valid?
+      @item_form.save
       redirect_to root_path
     else
       render :new
@@ -98,8 +98,8 @@ class ItemsController < ApplicationController
     )
   end
 
-  def item_params
-    params.require(:item).permit(
+  def item_form_params
+    params.require(:item_form).permit(
       :name,
       :info,
       :category_id,
@@ -108,7 +108,7 @@ class ItemsController < ApplicationController
       :delivery_fee_payer_id,
       :prefecture_id,
       :price,
-      images: [] 
+      {images: []} 
     ).merge(user_id: current_user.id)
   end
 
