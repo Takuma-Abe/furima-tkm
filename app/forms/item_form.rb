@@ -27,7 +27,7 @@ class ItemForm
   validates_inclusion_of :price, in: 300..9_999_999, message: "Out of setting range"
   
   def save
-    item = Item.neww(
+    item = Item.new(
       name: name,
       info: info,
       category_id: category_id,
