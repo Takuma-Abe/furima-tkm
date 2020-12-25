@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = ItemForm.new
+    @item = Item.new
   end
 
   def create
