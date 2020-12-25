@@ -32,7 +32,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const buildNewFileField = () => {
       const newFileField =document.createElement('input');                             //input要素を生成
       newFileField.setAttribute('type', 'file');                                       //生成したinpout要素にtype属性とfileを付与
-      newFileField.setAttribute('name', 'item[images][]');                             //生成したinput要素にname属性を付与
+      newFileField.setAttribute('name', 'item_form[images][]');                             //生成したinput要素にname属性を付与
       
       const lastFileField = document.querySelector('input[type="file"][name="item[images][]"]:last-child') //最後のfile_fieldを取得
     console.log('lastfilefield:',lastFileField);
