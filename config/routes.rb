@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   resources :items do
     resources :transactions, only: [:index, :new, :create]
     resources :comments , only: [:create]
+    collection do
+      get 'search'
+    end
     member do
       get :purchase_confirm
       post :purchase
