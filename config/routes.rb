@@ -15,6 +15,9 @@ Rails.application.routes.draw do
       get :purchase_confirm
       post :purchase
     end
+    collection do
+      get 'search'
+    end
   end
   resources :cards, only: [:index, :new, :create, :destroy]
 end
