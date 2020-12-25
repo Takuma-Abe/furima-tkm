@@ -11,6 +11,7 @@ class ItemForm
   attribute :price, :integer
   attribute :images, :binary
   attribute :user_id, :big_integer
+  attribute :tag_name, :string
 
   with_options presence: true do
     validates :images
