@@ -40,6 +40,13 @@ class ItemForm
       user_id: user_id,
       images: images
     )
+
+    if self.tag_name.present?
+      # using where method to find tag by name if the name is already exist or not by using first_or_initialize
+      tag = Tag.where(name: self.tag_name).first_or_initialize
+      # put "tag" which has the result of the above code into item.tags
+      item.tags << tag
+    end
     item.save
   end
 end
