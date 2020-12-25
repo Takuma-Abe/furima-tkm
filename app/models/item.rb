@@ -27,20 +27,28 @@ class Item < ApplicationRecord
     validates :price
   end
 
-  # check if the price value is half-width and integer
-  
-  validates :price, numericality: {with: /\A[0-9]+\z/, message: "Half-width number"}
-
-  # check if the price is in the range
-  validates_inclusion_of :price, in: 300..9_999_999, message: "Out of setting range"
-
-  # check if the select is still in id: 0 whoch is "---"
-  with_options numericality: {other_than: 0, massage: "Select"} do
+  with_options presence: true do {message: "Select"}
     validates :category_id
     validates :sales_status_id
     validates :delivery_fee_payer_id
     validates :prefecture_id
     validates :delivery_day_id
   end
+
+  # check if the price value is half-width and integer
+  
+  validates :price, numericality: {with: /\A[0-9]+\z/, message: "Half-width number"}
+ 
+  # check if the price is in the range
+  validates_inclusion_of :price, in: 300..9_999_999, message: "Out of setting range"
+
+  # check if the select is still in id: 0 whoch is "---"
+  # with_options numericality: {other_than: 0, massage: "Select"} do
+  #   validates :category_id
+  #   validates :sales_status_id
+  #   validates :delivery_fee_payer_id
+  #   validates :prefecture_id
+  #   validates :delivery_day_id
+  # end
 
 end
