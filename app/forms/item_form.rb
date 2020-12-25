@@ -1,10 +1,16 @@
 class ItemForm
   include ActiveModel::Model
-  attr_accessor(
-                :name, :info, :category_id, :sales_status_id,
-                :delivery_day_id, :prefecture_id, :delivery_fee_payer_id,
-                :price, :images, :user_id
-                )
+  include ActiveModel::Attributes
+  attribute :name, :string
+  attribute :info, :string
+  attribute :category_id, :big_integer
+  attribute :sales_status_id, :big_integer
+  attribute :delivery_day_id, :big_integer
+  attribute :prefecture_id, :big_integer
+  attribute :delivery_fee_payer_id, :big_integer
+  attribute :price, :integer
+  attribute :images, :binary
+  attribute :user_id, :big_integer
 
   with_options presence: true do
     validates :images

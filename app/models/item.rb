@@ -20,12 +20,12 @@ class Item < ApplicationRecord
   # Validation-----------------------
 
   # chech if these value are presence or not
-  with_options presence: true do
-    validates :images
-    validates :name
-    validates :info
-    validates :price
-  end
+  # with_options presence: true do
+  #   validates :images
+  #   validates :name
+  #   validates :info
+  #   validates :price
+  # end
 
   with_options presence: true do {message: "Select"}
     validates :category_id
