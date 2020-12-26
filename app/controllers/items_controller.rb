@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    # binding.pry
+    binding.pry
     @item_form = ItemForm.new(item_form_params)
     if @item_form.valid?
       @item_form.save
@@ -103,6 +103,7 @@ class ItemsController < ApplicationController
       :name,
       :info,
       :category_id,
+      :tag_name,
       :delivery_day_id,
       :sales_status_id,
       :delivery_fee_payer_id,
@@ -113,7 +114,6 @@ class ItemsController < ApplicationController
   end
 
   def select_item
-    # binding.pry
     @item = Item.find(params[:id])
   end
 

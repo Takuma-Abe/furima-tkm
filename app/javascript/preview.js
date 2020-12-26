@@ -34,7 +34,7 @@ window.addEventListener("DOMContentLoaded", () => {
       newFileField.setAttribute('type', 'file');                                       //生成したinpout要素にtype属性とfileを付与
       newFileField.setAttribute('name', 'item_form[images][]');                             //生成したinput要素にname属性を付与
       
-      const lastFileField = document.querySelector('input[type="file"][name="item[images][]"]:last-child') //最後のfile_fieldを取得
+      const lastFileField = document.querySelector('input[type="file"][name="item_form[images][]"]:last-child') //最後のfile_fieldを取得
     console.log('lastfilefield:',lastFileField);
     const nextDataIndex = Number(lastFileField.getAttribute('data-index')) +1;    // nextDataIndex = 最後のfile_fieldのdata-index + 1
     console.log('next-data-index:', nextDataIndex);
@@ -98,7 +98,7 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log("image_count:", image_count);
     if (image_count < image_limits)buildNewFileField();
   };
-  const fileField = document.querySelector('input[type="file"][name="item[images][]"]');  // 画像のfile_fieldの取得
+  const fileField = document.querySelector('input[type="file"][name="item_form[images][]"]');  // 画像のfile_fieldの取得
 
   fileField.addEventListener("change", changedFileField); //イベント発火
 })
