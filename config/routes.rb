@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     post 'users/create_address_preset', to: 'users/registrations#create_address_preset'
   end
   root 'items#index'
+  resources :tags, only: [:index]
   resources :items do
     resources :transactions, only: [:index, :new, :create]
     resources :comments , only: [:create]
