@@ -3,8 +3,14 @@ window.addEventListener("DOMContentLoaded", ()=> {
   if (!tagNameInput) return null;
 
   tagNameInput.addEventListener("input", (e)=> {
-    const input = e.target.;
-    console.log("Contents:", input)
+    const input = e.target.value;
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `/tags/?tag_name=${input}`, true);
+    xhr.responseType = "json";
+    xhr.send();
+    xhr.onload = () => {
+      console.log("tag_result:", xhr.response.tags);
+    }
   })
 })
 
