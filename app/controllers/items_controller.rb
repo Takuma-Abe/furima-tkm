@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :select_item, only: [:show, :edit, :update, :destroy, :purchase_confirm, :purchase]
+  before_action :set_item_form, only: [:edit, :update]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :purchase_confirm, :purchase]
   before_action :sold_item, only: [:purchase_confirm, :purchase]
   before_action :current_user_has_no_card, only: [:purchase_confirm, :purchase]
@@ -13,7 +14,6 @@ class ItemsController < ApplicationController
   end
 
   def create
-    binding.pry
     @item_form = ItemForm.new(item_form_params)
     if @item_form.valid?
       @item_form.save
@@ -25,18 +25,19 @@ class ItemsController < ApplicationController
 
   def edit
     # 実装条件 ：ログイン状態の出品者だけが商品情報編集ページに遷移できること
+    @item_form.tag_name = @item.tags.first&.name
     if current_user.id != @item.user.id
       redirect_to root_path
     end 
   end
 
   def update
-    if current_user.id == @item.user.id
-      if @item.update(item_params)
-        redirect_to item_path 
-      end 
+    render 'edit' unless current_user.id == @item.user.id
+    @item_form = ItemForm.new(item_form_params)
+    if @item_form.update(item_form_params, @item)
+        redirect_to item_path(@item.id)
     else
-      render 'edit'
+      render :edit
     end
   end
 
@@ -115,6 +116,11 @@ class ItemsController < ApplicationController
 
   def select_item
     @item = Item.find(params[:id])
+  end
+
+  def set_item_form
+    item_attributes = @item.attributes
+    @item_form = ItemForm.new(item_attributes)
   end
 
   def sold_item

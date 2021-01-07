@@ -10,6 +10,24 @@ window.addEventListener("DOMContentLoaded", ()=> {
     xhr.send();
     xhr.onload = () => {
       console.log("tag_result:", xhr.response.tags);
+      const tags = xhr.response.tags;
+      const tagSearchResultWrapper = document.querySelector("#tag-search-result");
+      tagSearchResultWrapper.innerHTML = "";
+      tagSearchResultWrapper.setAttribute("style", "");
+      if (tags.length != 0) {
+        tagSearchResultWrapper.setAttribute("style", "border: 1px solid black");
+      }
+      tags.forEach(function (tag) {
+        const tagElement = document.createElement("div");
+        tagElement.innerText = tag.name;
+        console.log("検索結果要素:", tagElement);
+        tagSearchResultWrapper.appendChild(tagElement);
+        tagElement.addEventListener("click", ()=> {
+          tagNameInput.value = tagElement.textContent;
+          tagSearchResultWrapper.setAttribute("style", "");
+          tagSearchResultWrapper.innerHTML= "";
+        });
+      })
     }
   })
 })
