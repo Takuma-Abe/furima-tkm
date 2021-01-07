@@ -12,7 +12,7 @@
 
   <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
   <%= render 'shared/error_messages', model: f.object %>
-  <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
+  <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。f.object = @user モデルオブジェクト自体のことを指している%>
 
   <div class="form-group">
     <div class='form-text-wrap'>

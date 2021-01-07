@@ -5,7 +5,7 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @item, local: true do |f| %>
+    <%= form_with model: @item_form, url: url, method: method, local: true do |f| %>
 
     <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
     <%= render 'shared/error_messages', model: f.object %>
@@ -23,7 +23,7 @@
           クリックしてファイルをアップロード
         </p>
         <%#= f.file_field :image, id:"item-image" %>
-        <%= f.file_field :images, name: 'item[images][]', id:"item-image", data:{index: 0} %>
+        <%= f.file_field :images, name: 'item_form[images][]', id:"item-image", data:{index: 0} %>
         <%# 複数投稿の実装： 空の配列を用意することで、複数のname属性入力があれば、それぞれを配列としてparamsに送れる。
              data:{index: 0}は何番目のの画像なのかを特定するdata-imdex属性を付与している%>
 
@@ -56,6 +56,12 @@
           <span class="indispensable">必須</span>
         </div>
         <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: "---", class:"select-box", id:"item-category"}) %>
+        <div class="weight-bold-text">
+          タグ
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_area :tag_name, class:"items-text", id:"tag-name-form", placeholder:"タグ名" %>
+        <div id="tag-search-result"></div>
         <div class="weight-bold-text">
           商品の状態
           <span class="indispensable">必須</span>

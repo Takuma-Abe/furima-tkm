@@ -3,6 +3,8 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one :item_transaction
   has_many :comments
+  has_many :item_tags, dependent: :destroy
+  has_many :tags, through: :item_tags
 
   # active_storage's assciation------
   # has_one_attached :image
@@ -20,12 +22,12 @@ class Item < ApplicationRecord
   # Validation-----------------------
 
   # chech if these value are presence or not
-  with_options presence: true do
-    validates :images
-    validates :name
-    validates :info
-    validates :price
-  end
+  # with_options presence: true do
+  #   validates :images
+  #   validates :name
+  #   validates :info
+  #   validates :price
+  # end
 
   with_options presence: true do {message: "Select"}
     validates :category_id
