@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
 
   def update
     render 'edit' unless current_user.id == @item.user.id
-    @item_form = ItemForm.new(item_form_params)
+    binding.pry
     if @item_form.update(item_form_params, @item)
         redirect_to item_path(@item.id)
     else

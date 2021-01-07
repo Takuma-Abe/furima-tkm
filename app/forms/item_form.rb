@@ -15,7 +15,6 @@ class ItemForm
   attribute :id, :integer
   attribute :created_at, :datetime
   attribute :updated_at, :datetime
-  attribute :tag_name, :string
   
 
   with_options presence: true do
@@ -56,28 +55,24 @@ class ItemForm
   end
 
   def update(params, item)
-    binding.pry
     tag_name = params.delete(:tag_name)
-    if tag_name.present?
-    tag = Tag.where(name: tag_name).first_or_initialize
-    end
+    tag = Tag.where(name: tag_name).first_or_initialize if tag_name.present?
     ActiveRecord::Base.transaction do
-      if tag_name.present?
+      tag.save if tag_name.present?
         item.update!(params)
-        item.item_eq_relations.destroy_all
-        if tag_name.present?
-        item.tags << tag
-        end
+        binding.pry
+        item.item_tags.destroy_all
+        item.tags << tag if tag_name.present?
         return true
       end
       rescue => e
-      if tag&.errors&.messages&.present?
-      tag.errors.messages[:tag_name] = tag.errors.messages.delete(:name)
-      end
+        tag.errors.messages[:tag_name] = tag.errors.messages.delete(:name) if tag&.errors&.messages&.present?
       item&.errors&.messages&.each do |key, message|
+        self.errors.add(key, message.first)
+      end
+      tag&.errors&.messages&.each do |key, message|
         self.errors.add(key, message.first)
       end
       return false
     end
-  end
 end
