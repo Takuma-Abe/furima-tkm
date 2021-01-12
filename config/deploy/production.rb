@@ -59,5 +59,8 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
+ActionCable.server.config.disable_request_forgery_protection = true
+config.action_cable.url = 'ws://Elastic IP/cable'
+config.action_cable.allowed_request_origins = [ 'http://Elastic IP' ]   
 
 server '54.168.227.164', user: 'ec2-user', roles: %w{app db web}

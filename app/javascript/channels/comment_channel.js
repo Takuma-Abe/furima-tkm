@@ -1,6 +1,11 @@
 import consumer from "./consumer"
 if(location.pathname.match(/items/) && location.pathname.match(/\d+/)){
-  consumer.subscriptions.create("CommentChannel", {
+  
+    consumer.subscriptions.create({
+      channel: "CommentChannel", 
+    item_id: location.pathname.match(/\d+/)[0]
+  },{
+
     connected() {
     },
 
