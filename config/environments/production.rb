@@ -39,6 +39,10 @@ Rails.application.configure do
   # config.active_storage.service = :local
   config.active_storage.service = :amazon
 
+  ActionCable.server.config.disable_request_forgery_protection = true
+  config.action_cable.url = 'ws://【Elastic IP】/cable'
+  config.action_cable.allowed_request_origins = [ 'http://【Elastic IP】' ]
+
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
