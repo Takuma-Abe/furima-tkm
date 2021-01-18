@@ -1,2 +1,1 @@
-# require_relative '../config/application'
-require_relative "../webpacker_env"
+Webpacker::Compiler.env["PAYJP_PUBLIC_KEY"] = ENV["PAYJP_PUBLIC_KEY"]
