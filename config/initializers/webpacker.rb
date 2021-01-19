@@ -3,4 +3,4 @@
 # Webpacker::Compiler.env["PAYJP_PUBLIC_KEY"] = Rails.application.credentials.payjp[:pc_key]
 
 require_relative '../config/application'
-+require_relative "../webpacker_env"
+require_relative '../webpacker_env'
