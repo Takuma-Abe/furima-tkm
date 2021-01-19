@@ -39,7 +39,7 @@ class TransactionsController < ApplicationController
   def pay_item
     # credentialsの記述に変更（ENV['PAYJP_SECRET_KEY']）
     # Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-    Payjp.api_key = Rails.application.credentials.payjp[:pc_key]
+    Payjp.api_key = Rails.application.credentials.payjp[:sk_key]
 
     Payjp::Charge.create(
       amount: @item.price,
