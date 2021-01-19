@@ -22,7 +22,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/config/initializers/webpacker.rb
+# /config/initializers/webpacker.rb
 
 /public/packs
 /public/packs-test
