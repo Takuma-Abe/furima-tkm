@@ -5,7 +5,8 @@ class CardsController < ApplicationController
   def index
     return unless current_user.card.present?
 
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] # 環境変数を読み込む
+    Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
+    # 環境変数を読み込む
     customer = Payjp::Customer.retrieve(current_user.card.customer_token) # 先程のカード情報を元に、顧客情報を取得
     @card = customer.cards.first
   end
@@ -14,7 +15,8 @@ class CardsController < ApplicationController
   end
 
   def create
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] # 環境変数を読み込む
+    Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
+ # 環境変数を読み込む
 
     customer = Payjp::Customer.create(
     description: 'test', # テストカードであることを説明
