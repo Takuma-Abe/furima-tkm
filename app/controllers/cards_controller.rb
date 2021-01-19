@@ -15,9 +15,9 @@ class CardsController < ApplicationController
   end
 
   def create
-    # Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
+    Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
 
-    Payjp.api_key =  "sk_test_9281c5527a1110560369dd7d"
+    # Payjp.api_key =  "sk_test_9281c5527a1110560369dd7d"
 
  # 環境変数を読み込む
 
